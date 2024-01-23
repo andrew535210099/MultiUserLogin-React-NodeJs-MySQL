@@ -1,4 +1,4 @@
-import Products from "../models/ProductModel";
+import Products from "../models/ProductModel.js";
 
 export const getProducts = (req, res) => {};
 
