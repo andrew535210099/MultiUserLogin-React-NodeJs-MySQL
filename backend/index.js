@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
+import UserRoute from "./routes/UserRoute.js";
+// import database from "./config/database.js";
 dotenv.config();
 
 const app = express();
