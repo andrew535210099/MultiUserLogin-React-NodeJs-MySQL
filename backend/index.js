@@ -7,24 +7,38 @@ import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
 dotenv.config();
 
+const PORT = process.env.APP_PORT || 4000;
+
 const app = express();
 
-async () => {
+// Untuk generate tabelnya kalau masih kosong
+const generateTables = async () => {
   await db.sync();
 };
+
+generateTables();
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  console.log("Reached / route");
+  res.send("Hello, World!");
+});
+
+app.use(UserRoute);
+app.use(ProductRoute);
 
 app.use(
   session({
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookies: {
+    cookie: {
       secure: "auto",
       // kalau https true kalau http false
     },
   })
 );
-// Middleware
 app.use(
   cors({
     // supaya bisa bertukar data seperti cookies
@@ -34,9 +48,6 @@ app.use(
   })
 );
 
-// supaya bisa menerima dalam format json
-app.use(express.json());
-
-app.listen(process.env.APP_PORT, () => {
-  console.log("Server up and running...");
+app.listen(PORT, () => {
+  console.log(`Server running on PORT ${PORT}`);
 });

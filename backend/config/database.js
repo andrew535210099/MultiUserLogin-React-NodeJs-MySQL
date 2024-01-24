@@ -13,4 +13,5 @@ db.authenticate()
   .catch(() => {
     console.log("Gagal terkoneksi");
   });
+
 export default db;
