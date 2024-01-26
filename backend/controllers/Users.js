@@ -3,8 +3,9 @@ import argon2 from "argon2";
 
 export const getUsers = async (req, res) => {
   try {
-    console.log("Incoming request body:", req.body);
-    const response = await Users.findAll();
+    const response = await Users.findAll({
+      attributes: ["uuid", "name", "email", "role"],
+    });
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ msg: "error get users" });
@@ -14,6 +15,7 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const response = await Users.findOne({
+      attributes: ["uuid", "name", "email", "role"],
       where: {
         uuid: req.params.id,
       },
@@ -45,6 +47,9 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const updateUser = (req, res) => {};
+export const updateUser = async (req, res) => {
+  const requestData = req.body.id;
+  console.log(requestData);
+};
 
 export const deleteUser = (req, res) => {};
