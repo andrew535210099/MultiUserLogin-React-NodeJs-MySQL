@@ -48,8 +48,8 @@ export const createUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const requestData = req.body.id;
-  console.log(requestData);
+  const { id } = req.params;
+  console.log(id);
 };
 
 export const deleteUser = (req, res) => {};
