@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import db from "./config/database.js";
 import UserRoute from "./routes/UserRoute.js";
 import ProductRoute from "./routes/ProductRoute.js";
+import AuthRoute from "./routes/AuthRoute.js";
 dotenv.config();
 
 const PORT = process.env.APP_PORT || 4000;
@@ -20,9 +21,6 @@ generateTables();
 
 app.use(express.json());
 
-app.use(UserRoute);
-app.use(ProductRoute);
-
 app.use(
   session({
     secret: process.env.SESS_SECRET,
@@ -34,6 +32,7 @@ app.use(
     },
   })
 );
+
 app.use(
   cors({
     // supaya bisa bertukar data seperti cookies
@@ -42,6 +41,10 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
+
+app.use(UserRoute);
+app.use(ProductRoute);
+app.use(AuthRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);

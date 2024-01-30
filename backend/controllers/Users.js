@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
     await Users.create({
       name: name,
       email: email,
-      password: hashpassword,
+      password: hashPassword,
       role: role,
     });
     res.status(201).json({ msg: "Register berhasil" });
