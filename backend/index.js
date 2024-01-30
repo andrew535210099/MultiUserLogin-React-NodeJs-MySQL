@@ -20,11 +20,6 @@ generateTables();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  console.log("Reached / route");
-  res.send("Hello, World!");
-});
-
 app.use(UserRoute);
 app.use(ProductRoute);
 

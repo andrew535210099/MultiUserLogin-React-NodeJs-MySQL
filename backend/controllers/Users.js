@@ -38,7 +38,7 @@ export const createUser = async (req, res) => {
     await Users.create({
       name: name,
       email: email,
-      password: password,
+      password: hashpassword,
       role: role,
     });
     res.status(201).json({ msg: "Register berhasil" });
@@ -48,8 +48,63 @@ export const createUser = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
+  const user = await Users.findOne({
+    attributes: ["uuid", "name", "email", "role"],
+    where: {
+      uuid: req.params.id,
+    },
+  });
+  if (!user) {
+    return res.status(404).json({ msg: "User tidak ditemukan" });
+  }
+  const { name, email, password, confPassword, role } = req.body;
+  let hashPassword;
+  if (password === "" || password === null) {
+    hashPassword = user.password;
+  } else {
+    hashPassword = await argon2.hash(password);
+  }
+  if (password !== confPassword) {
+    return res
+      .status(400)
+      .json({ msg: "Password dan Confirm Password tidak cocok" });
+  }
+  try {
+    await Users.update(
+      {
+        name: name,
+        email: email,
+        password: hashpassword,
+        role: role,
+      },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "User Updated" });
+  } catch (error) {
+    return res.status(400).json({ msg: "Error nih" });
+  }
 };
-
-export const deleteUser = (req, res) => {};
+export const deleteUser = async (req, res) => {
+  const user = await Users.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+  if (!user) {
+    return res.status(404).json({ msg: "User tidak ditemukan" });
+  }
+  try {
+    await Users.destroy({
+      where: {
+        id: user.id,
+      },
+    });
+    res.status(200).json({ msg: "User Deleted" });
+  } catch (error) {
+    return res.status(400).json({ msg: "Error nih" });
+  }
+};

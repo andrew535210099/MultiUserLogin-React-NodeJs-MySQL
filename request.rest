@@ -1,0 +1,20 @@
+# Create a user
+POST http://localhost:4000/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john@gmail.com",
+    "password": "123456",
+    "confPassword": "123456",
+    "role": "user"
+}
+
+###
+GET http://localhost:4000/users
+
+###
+GET http://localhost:4000/users/16535f20-3e90-4e5a-b76c-ba78476d5bd8
+
+###
+PATCH http://localhost:4000/users/16535f20-3e90-4e5a-b76c-ba78476d5bd8
