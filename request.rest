@@ -3,8 +3,8 @@ POST http://localhost:4000/users
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "email": "john@gmail.com",
+    "name": "Tester",
+    "email": "tester@gmail.com",
     "password": "123456",
     "confPassword": "123456",
     "role": "user"
@@ -14,7 +14,76 @@ Content-Type: application/json
 GET http://localhost:4000/users
 
 ###
-GET http://localhost:4000/users/16535f20-3e90-4e5a-b76c-ba78476d5bd8
+GET http://localhost:4000/users/
 
 ###
 PATCH http://localhost:4000/users/16535f20-3e90-4e5a-b76c-ba78476d5bd8
+
+###
+DELETE hhtp://localhost"4000/users/16535f20-3e90-4e5a-b76c-ba78476d5bd8
+
+### 
+// Login User
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "email": "johndoe@gmail.com",
+    "password": "123456" 
+}
+
+### 
+// Login User
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "email": "tester@gmail.com",
+    "password": "123456" 
+}
+
+###
+GET http://localhost:4000/me
+
+###
+DELETE http://localhost:4000/logOut
+
+###
+GET http://localhost:4000/products
+
+### 
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "Iphone 12",
+    "price": 997
+}
+
+
+###
+PATCH http://localhost:4000/products/6e9e4d69-4f74-44c7-ab71-2e685a6c89f2
+Content-Type: application/json
+
+{
+    "name": "Iphone 13 PM",
+    "price": 1298
+}
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "Iphone 12",
+    "price": 897
+}
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "Iphone 10",
+    "price": 797
+}
