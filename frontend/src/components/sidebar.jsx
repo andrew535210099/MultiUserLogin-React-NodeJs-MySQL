@@ -1,29 +1,41 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { IoPerson, IoPricetag, IoHome, IoLogOut } from "react-icons/io5";
 
 const sidebar = () => {
   return (
     <div>
-      <aside className="menu has-shadow">
+      <aside className="menu pl-2 has-shadow">
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/dashboard"}>Dashboard</NavLink>
+            <NavLink to={"/dashboard"}>
+              <IoHome />
+              Dashboard
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/products"}>Product</NavLink>
+            <NavLink to={"/products"}>
+              <IoPricetag />
+              Product
+            </NavLink>
           </li>
         </ul>
         <p className="menu-label">Admin</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/users"}>Users</NavLink>
+            <NavLink to={"/users"}>
+              <IoPerson /> Users
+            </NavLink>
           </li>
         </ul>
         <p className="menu-label">Settings</p>
         <ul className="menu-list">
           <li>
-            <button className="button is-white">LogOut</button>
+            <button className="button is-white">
+              <IoLogOut />
+              LogOut
+            </button>
           </li>
         </ul>
       </aside>
