@@ -39,6 +39,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
       const message = error.response.data.msg;
       return thunkAPI.rejectWithValue({ message });
     }
+    throw error; // Jika error tidak terkait respons, lempar kembali error
   }
 });
 
