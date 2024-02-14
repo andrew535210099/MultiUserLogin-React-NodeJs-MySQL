@@ -15,6 +15,7 @@ const FormAddProduct = () => {
         name: name,
         price: price,
       });
+      navigate("/products");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);

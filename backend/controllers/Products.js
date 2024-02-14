@@ -43,43 +43,20 @@ export const getProductById = async (req, res) => {
   try {
     const product = await Products.findOne({
       where: {
-        [Op.and]: [{ id: product.id }, { userId: req.userId }],
+        uuid: req.params.id, // Menggunakan uuid dari params untuk mencari produk
+        userId: req.userId, // Hanya mencari produk yang dimiliki oleh pengguna saat ini
       },
+      include: [
+        {
+          model: Users,
+          attributes: ["name", "email"],
+        },
+      ],
     });
     if (!product) {
       return res.status(404).json({ msg: "Data tidak ditemukan" });
     }
-    let response;
-    // dapet request dari middleware
-    if (req.role == "admin") {
-      response = await Products.findOne({
-        attributes: ["uuid", "name", "price"],
-        where: {
-          id: product.id,
-        },
-        include: [
-          {
-            model: Users,
-            attributes: ["name", "email"],
-          },
-        ],
-      });
-    } else {
-      response = await Products.findOne({
-        attributes: ["uuid", "name", "price"],
-        // hanya bisa melihat yang dia input sendiri
-        where: {
-          userId: req.userId,
-        },
-        include: [
-          {
-            model: Users,
-            attributes: ["name", "email"],
-          },
-        ],
-      });
-    }
-    res.status(200).json(response);
+    res.status(200).json(product); // Mengembalikan produk yang ditemukan
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
