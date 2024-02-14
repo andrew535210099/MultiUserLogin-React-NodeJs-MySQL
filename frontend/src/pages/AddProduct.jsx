@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Layout from "./Layout";
-import FormAddUser from "../components/FormAddUser";
+import FormAddProduct from "../components/FormAddProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice";
@@ -22,7 +22,7 @@ const AddProduct = () => {
   }, [isError, navigate]);
   return (
     <Layout>
-      <FormAddUser />
+      <FormAddProduct />
     </Layout>
   );
 };
